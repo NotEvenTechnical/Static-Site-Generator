@@ -13,17 +13,22 @@ class TextType(Enum):
 class TextNode:
 
     def __init__(self, text, text_type, url = 0):
+
+        if text is None:
+            raise TypeError("text property cannot be None")
         self.text = text                                  # text content of node
 
         if not isinstance(text_type, TextType):
             raise ValueError("text_type must be a member of the TextType enum")
         self.text_type = text_type                        # type of text in the node
 
+        if url is None:
+            raise TypeError("url property cannot be None")
         self.url = url                                    # url of link/img if it's a link
 
 
     def __eq__(self, other):
-        if isinstance(other, TextNode):
+        if not isinstance(other, TextNode):
             return False
 
         return (
